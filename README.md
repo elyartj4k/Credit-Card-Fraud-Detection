@@ -1,193 +1,153 @@
+### 💳 Credit Card Fraud Detection API
 
-# 💳 Credit Card Fraud Detection Flask API
+This repository contains a Flask API for credit card fraud detection, powered by a machine learning model. It includes pre-trained models, data preprocessing tools, and a simple API for making predictions. This project is a proof of concept and is intended for educational and experimental purposes.
 
-This repository contains a Flask API for credit card fraud detection using a machine learning model. The project includes pre-trained models, data preprocessing, and an API for making predictions. Below, you'll find information on how to use this code for local development, the project structure, and an explanation of the machine learning model.
+-----
 
-## ⚠️ Disclaimer
+### ⚠️ A Note on the Dataset
 
-Please note that this project is a proof of concept and can be used for educational and experimental purposes only. It is based on the Kaggle dataset obtained from [MLG - ULB's Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). 
+This project uses a dataset from the **MLG - ULB Credit Card Fraud Detection** Kaggle competition. For security and privacy, the original features have been replaced with derived features obtained through Principal Component Analysis (PCA).
 
-As this dataset contains actual banking data, the original features have been omitted and replaced with derived features obtained through Principal Component Analysis (PCA) for privacy and security reasons. While this project provides a credit card fraud detection model in the "model/source-model.ipynb" notebook, it is essential to understand that the model's performance and suitability may vary when applied to different datasets or real-world scenarios. Feel free to use the model as a starting point and make suitable modifications to adapt it to your specific data and requirements. Always exercise caution and follow best practices when working with sensitive financial or personal data. 
+The model's performance may vary in real-world scenarios, so feel free to use it as a starting point and adapt it to your specific data and requirements. Always handle sensitive data with caution\! 🛡️
 
-## 📁 Project Structure
+-----
 
-The project is organized as follows:
+### 📂 Project Layout
 
-- `testcode/`: A folder containing a test script, `sample.py`, for checking if the API works.
-- `model/source-model.ipynb`: The Directory for the Jupyter Notebook containing the machine learning model development and training process.
-- `app.py`: The Flask application file that runs the API.
-- `model.h5`: A pre-trained machine learning model for fraud detection.
-- `README.md`: This readme file.
-- `requirements.txt`: A file listing the required Python packages.
-- `vectorizer.pkl`: A pre-trained vectorizer or scaler for data preprocessing.
+Here's a quick look at the project's folder structure:
 
+  * `testcode/`: A folder containing `sample.py` to test the API.
+  * `model/source-model.ipynb`: A Jupyter Notebook detailing the model's development and training.
+  * `app.py`: The core Flask application file.
+  * `model.h5`: The pre-trained fraud detection model.
+  * `requirements.txt`: Lists all the necessary Python packages.
+  * `vectorizer.pkl`: A pre-trained data preprocessing tool.
+  * `README.md`: You're reading it\!
 
-## 🚀 How to Use the Code
+-----
 
-Follow these steps to set up and run the Credit Card Fraud Detection Flask API locally:
+### 🚀 Get Started\!
 
-1. Clone this repository:
+Follow these steps to get the API running locally:
 
-   ```bash
-   git clone https://github.com/NotSooShariff/CC-Fraud-Detection.git
-   ```
+1.  **Clone the repository:**
 
-2. Navigate to the project directory:
+    ```bash
+    git clone https://github.com/NotSooShariff/CC-Fraud-Detection.git
+    ```
 
-   ```bash
-   cd credit-card-fraud-detection
-   ```
+2.  **Navigate to the project:**
 
-3. Install the required Python packages:
+    ```bash
+    cd credit-card-fraud-detection
+    ```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+3.  **Install dependencies:**
 
-4. Start the Flask server by running:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-   ```bash
-   python app.py
-   ```
+4.  **Run the Flask app:**
 
-   This will start the server on `http://127.0.0.1:5000`.
+    ```bash
+    python app.py
+    ```
 
-5. To expose the API to the web, you can use [ngrok](https://ngrok.com/). After registering for Ngrok, go to the [Setup Page](https://dashboard.ngrok.com/get-started/setup) and download and unzip the executable.
-6. Launch the executable. Once the terminal pops, Configure the auth token by using the `ngrok config add-authtoken` command. Your auth token will be displayed in the same dashboard.
+    Your API will be live at `http://127.0.0.1:5000`.
 
-7. You can now expose the port to the web with a secure tunnel, by using:
+5.  **Expose your API to the web:**
+    You can use [ngrok](https://ngrok.com/) to create a public URL for your local server.
 
-   ```bash
-   ngrok http 5000
-   ```
+      * Download and install ngrok.
+      * Configure your auth token using `ngrok config add-authtoken YOUR_AUTH_TOKEN`.
+      * Create a tunnel to your API:
 
-   Use the URL under "Forwarding" in Ngrok to make API calls.
+    <!-- end list -->
 
+    ```bash
+    ngrok http 5000
+    ```
 
-## 🧠 Machine Learning Model Explanation
+    Use the provided "Forwarding" URL from ngrok to make calls from anywhere\! 🌐
 
-The machine learning model for credit card fraud detection was developed in the `source-model.ipynb` Jupyter Notebook. This model aims to detect fraudulent credit card transactions based on various features from the dataset. Here's an overview of the key steps and techniques used in developing this model:
+-----
 
-1. **Data Loading and Preprocessing**:
-   - The dataset for credit card fraud detection was loaded from a CSV file using Pandas.
-   - The dataset contains features, including transaction amount, time, and other anonymized features.
-   - Data preprocessing was performed to prepare the dataset for modeling.
+### 🧠 The Brain Behind the API: Model Explained
 
-2. **Exploratory Data Analysis (EDA)**:
-   - Exploratory data analysis was conducted to gain insights into the dataset.
-   - Visualizations, such as histograms, were used to understand the distribution of features, including the distribution of fraud and non-fraud transactions.
+The fraud detection model was meticulously developed in the `source-model.ipynb` notebook. Here's a brief overview of the process:
 
-3. **Feature Scaling and Transformation**:
-   - Feature scaling was applied to the "Amount" column using the RobustScaler to handle outliers effectively.
-   - The "Time" column was normalized to bring it within a consistent range.
+  * **Data Prep:** Loaded and cleaned a dataset with anonymized features.
+  * **EDA:** Explored data distributions, especially the balance of fraudulent vs. non-fraudulent transactions.
+  * **Scaling:** Applied **RobustScaler** to handle outliers in the "Amount" feature.
+  * **Training:** Trained several models, including **Logistic Regression, Random Forest, Gradient Boosting**, and **SVC**.
+  * **Evaluation:** Assessed model performance using metrics like **accuracy, precision, recall**, and **F1-score**.
+  * **Imbalance Handling:** Used oversampling and undersampling to ensure fair training on imbalanced data.
+  * **Fine-tuning:** Optimized hyperparameters to enhance the model's performance.
 
-4. **Data Splitting**:
-   - The dataset was split into training, testing, and validation sets for model development and evaluation.
-   - The training set contains the majority of the data, while the validation set is used for fine-tuning hyperparameters.
+-----
 
-5. **Model Selection and Training**:
-   - Several machine learning models were used for credit card fraud detection, including:
-     - Logistic Regression
-     - Random Forest Classifier
-     - Gradient Boosting Classifier
-     - Support Vector Classifier (SVC)
-   - Each model was trained on the training dataset.
+### 🌐 API Endpoint
 
-6. **Model Evaluation**:
-   - Model performance was evaluated using classification metrics such as accuracy, precision, recall, and F1-score.
-   - Classification reports were generated to assess the model's ability to detect fraud and non-fraud transactions.
+The API has a single endpoint for making predictions:
 
-7. **Handling Class Imbalance**:
-   - In cases where class imbalance was present (i.e., a significant difference between fraud and non-fraud samples), techniques like oversampling and undersampling were used to balance the dataset.
+#### `/predict` (POST)
 
-8. **Model Fine-Tuning and Improvement**:
-   - Model hyperparameters were fine-tuned to optimize performance.
-   - Different architectures and hyperparameters were explored for neural network models to enhance fraud detection.
+  * **Request Header:** `ngrok-skip-browser-warning: true` (Required for ngrok)
 
-9. **Exporting the Final Model**:
-   - The final trained model, along with any required preprocessing transformers (e.g., scalers or encoders), was serialized and saved for later use in the Flask API.
+  * **Request Body (JSON):**
 
-10. **Model Selection and Comparison**:
-    - The performance of multiple models, including logistic regression, random forest, gradient boosting, and support vector classification, was compared to identify the best-performing model for credit card fraud detection.
-
-11. **Handling Class Imbalance (Balanced Dataset)**:
-    - In situations with class imbalance, a balanced dataset was created by sampling an equal number of fraudulent and non-fraudulent transactions.
-
-12. **Reevaluation on Balanced Dataset**:
-    - The best-performing models were reevaluated on the balanced dataset to assess their performance on detecting fraud while mitigating the effects of class imbalance.
-
-13. **Summary of Model Performance**:
-    - The classification reports provide a detailed summary of each model's performance in terms of precision, recall, F1-score, and accuracy for both fraud and non-fraud classes.
-
-These steps outline the process of developing and evaluating the machine learning models for credit card fraud detection. The final models, along with the preprocessing steps, are integrated into the Flask API for real-time fraud detection.
-
-## 🌐 API Endpoints and Example Usage
-
-The Credit Card Fraud Detection Flask API provides the following endpoint for predicting whether a given transaction is fraudulent or not:
-
-### `/predict` (POST)
-
-This endpoint accepts a JSON request containing the transaction data to be predicted. To use this endpoint, you should also set a request header to skip the ngrok browser warning, as ngrok may display a warning page otherwise.
-
-**Request Header:**
-```
-ngrok-skip-browser-warning: true
-```
-
-**Request Body:**
-```json
-{
-    "data": {
-        "V1": -1.359807,
-        "V2": -0.072781,
-        "V3": 2.536347,
-        ...
-        "V28": -0.021053,
-        "Amount": 149.62,
-        "Time": 1
+    ```json
+    {
+        "data": {
+            "V1": -1.359807,
+            "V2": -0.072781,
+            "V3": 2.536347,
+            ...
+            "V28": -0.021053,
+            "Amount": 149.62,
+            "Time": 1
+        }
     }
-}
-```
+    ```
 
-**Response:**
-- If the response is `1`, it indicates that the transaction is likely fraudulent.
-- If the response is `0`, it indicates that the transaction is not fraudulent.
-- If there is an error, the API may respond with an appropriate HTTP status code and an error message.
+  * **Response:**
 
-### Example Usage
+      * `1`: Fraudulent transaction. 🚩
+      * `0`: Not fraudulent. ✅
 
-You can use the provided test script in the `testcode/` folder, `sample.py`, to make requests to the API. Here's how to use it:
+-----
 
-1. Ensure that the Flask API is running locally, and ngrok is set up to expose the API.
+### ✨ Example Usage
 
-2. Navigate to the `testcode/` folder in your terminal:
+1.  Ensure the Flask API and ngrok are running.
 
-   ```bash
-   cd testcode/
-   ```
+2.  Navigate to the `testcode/` folder:
 
-3. Run the test script, specifying the transaction data you want to predict as a JSON object:
+    ```bash
+    cd testcode/
+    ```
 
-   ```bash
-   python sample.py 
-   ```
+3.  Run the sample script with your transaction data:
 
-   This script sends a POST request to the `/predict` endpoint with the provided transaction data and the `ngrok-skip-browser-warning` header set to `true`.
+    ```bash
+    python sample.py
+    ```
 
-4. The script will display the API response, indicating whether the transaction is likely fraudulent or not.
+    This script sends a request and prints the prediction:
 
-Example Output:
-```
-Prediction: 0.0 --> Not Fraud
-```
+    ```
+    Prediction: 0.0 --> Not Fraud
+    ```
 
+-----
 
-## 🙏 Acknowledgments
+### 🙏 A Big Thank You\!
 
-Much of what I learned and applied in this project was learnt from [Gregg Hogg's](https://www.youtube.com/GregHogg) YouTube channel. His tutorials and content in machine learning and data science significantly influenced the development.
+This project would not have been possible without the excellent tutorials from **Gregg Hogg's YouTube channel**. His content on machine learning was a major inspiration\! 👏
 
-## 🤝 Contributions Welcome
+-----
 
-Contributions to this project are welcome! If you have ideas for improvements, bug fixes, or new features, please feel free to fork this repository, make your changes, and submit a pull request. Let's collaborate to make this project even better.
-# Credit-Card-Fraud-Detection
- a0605362275bd8b5bce3e63f596e07b5117a24b8
+### 🤝 Contributions
+
+Got an idea to improve this project? Found a bug? Feel free to **fork** this repository, make your changes, and submit a **pull request**\! Let's build something great together. 🚀
