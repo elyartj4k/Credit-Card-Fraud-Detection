@@ -1,3 +1,4 @@
+
 # 💳 Credit Card Fraud Detection Flask API
 
 This repository contains a Flask API for credit card fraud detection using a machine learning model. The project includes pre-trained models, data preprocessing, and an API for making predictions. Below, you'll find information on how to use this code for local development, the project structure, and an explanation of the machine learning model.
@@ -188,3 +189,5 @@ Much of what I learned and applied in this project was learnt from [Gregg Hogg's
 ## 🤝 Contributions Welcome
 
 Contributions to this project are welcome! If you have ideas for improvements, bug fixes, or new features, please feel free to fork this repository, make your changes, and submit a pull request. Let's collaborate to make this project even better.
+# Credit-Card-Fraud-Detection
+ a0605362275bd8b5bce3e63f596e07b5117a24b8
